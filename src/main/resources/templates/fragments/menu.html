@@ -19,11 +19,11 @@
          <a class="nav-link" th:href="@{/results/findAll}">Results</a>
       </li>  
    
-      <li class="nav-item">
-         <a class="nav-link" th:href="@{/users/findAll}">Users</a>
+      <li class="nav-item"  sec:authorize="hasAnyAuthority('admin')">
+         <a class="nav-link"   th:href="@{/users/findAll}">Users</a>
       </li>  
     </ul>  
-   
+   <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>
      <a class="btn btn-primary"  th:href="@{/logout}">Exit</a>&nbsp;
   </div>
 </nav>

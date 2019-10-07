@@ -1,10 +1,17 @@
 package ca.project.model;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="usuarios")
@@ -16,9 +23,19 @@ public class Users {
 	private String password;
 	private String enabled;
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> rols;
 	
 	public long getId() {
 		return id;
+	}
+	public Set<Role> getRols() {
+		return rols;
+	}
+	public void setRols(Set<Role> rols) {
+		this.rols = rols;
 	}
 	public void setId(long id) {
 		this.id = id;
